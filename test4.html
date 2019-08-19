@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>腾讯</title>
+    <script src="jquery-3.3.1.min.js"></script>
+    <style>
+        div {
+            width: 200px;
+            height: 200px;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="d1">获取中</div>
+</body>
+
+<script>
+    $(document).ready(
+        function() {
+            var va;
+            var data = {
+                key: "AGDBZ-TRYKF-5CBJN-NYEFZ-SAGDT-CHF47",
+                output: "jsonp"　　　　
+            }
+            $.ajax({
+                type: "get",
+                dataType: 'jsonp',
+                data: data,
+                jsonp: "callback",
+                jsonpCallback: "QQmap",
+                url: "https://apis.map.qq.com/ws/location/v1/ip",
+                success: function(json) {
+
+                    if (json.status == 0) {
+                        // console.log(json.result.ad_info);
+                        va = json.result.ad_info;
+                        console.log(va);
+                        $('#d1').html('国家:' + va.nation + '，市区:' + va.province);
+
+                    } else {
+                        console.log(json.message);
+                        $('#d1').html(json.message);
+
+                    }
+                },
+                error: function(err) {
+                    console.log("服务端错误，请刷新浏览器后重试");
+                    $('#d1').html("服务端错误，请刷新浏览器后重试");
+
+                }
+
+
+            })
+        }
+    )
+</script>
+
+</html>
