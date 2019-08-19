@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>异步加载</title>
+    <script src="http://api.map.baidu.com/api?v=2.0&ak=C4l94QH27DiPCFHEGVqufsnh3fgPAGnM" type="text/javascript"></script>
+    <script>
+        navigator.geolocation.getCurrentPosition(function(position) {
+            var lat = position.coords.latitude;
+            var lon = position.coords.longitude;
+            var point = new BMap.Point(lon, lat); // 创建坐标点
+            // 根据坐标得到地址描述
+            var myGeo = new BMap.Geocoder();
+            myGeo.getLocation(point, function(result) {
+                var city = result.addressComponents.city;
+                console.log(city);
+                var po = document.getElementById('p1');
+                po.innerHTML = city;
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <p id="p1"></p>
+</body>
+
+</html>
