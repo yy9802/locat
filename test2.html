@@ -14,9 +14,9 @@
             var myGeo = new BMap.Geocoder();
             myGeo.getLocation(point, function(result) {
                 var city = result.addressComponents.city;
-                console.log(city);
+                console.log(result.addressComponents);
                 var po = document.getElementById('p1');
-                po.innerHTML = city;
+                po.innerHTML = result.addressComponents;
             });
         });
     </script>
